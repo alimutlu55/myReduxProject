@@ -71,7 +71,7 @@ class index extends Component {
             Yup.object().shape({
               email: Yup
                 .string()
-                .email('*Invalid format')
+                .email('*Invalid format')          
                 .required('*Please enter your email'),
               password: Yup
                 .string()
