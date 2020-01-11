@@ -1,0 +1,5 @@
+export const INVESTMENT = 'INVESTMENT'
+export const WITHDRAW = 'WITHDRAW'
+export const SHOW_ACTIVITIES = 'SHOW_ACTIVITIES'
+export const SAVE_USER = 'SAVE_USER'
+export const EXCHANGE_RATE = 'EXCHANGE_RATE'
