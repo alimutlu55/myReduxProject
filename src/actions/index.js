@@ -15,7 +15,7 @@ export const withdrawMoney = (amount) => ({
     amount,
     activityInfo: {
         id: value++,
-        type: "PARA_ÇEKME",
+        type: "PARA_ÇEKME",         
         amount
     }
 })
