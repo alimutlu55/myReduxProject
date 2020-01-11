@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 import { Header, Left, Icon } from 'native-base'
 import { connect } from 'react-redux'
 import ExchangeRate from '../ExchangeRateScreen'
