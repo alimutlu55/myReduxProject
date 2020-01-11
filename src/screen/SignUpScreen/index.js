@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TextInput, ActivityIndicator } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Alert } from 'react-native'
 import { Header, Button, Body, Title } from 'native-base';
 import { Formik } from 'formik'
 import * as Yup from 'yup'
@@ -13,24 +13,33 @@ class index extends Component {
     alreadySaved = false
   }
 
-  _handleSubmit = values => {                    
+  _handleSubmit = values => {
     axios.post('http://localhost:8000/kayitGetir', { // BU EMAİL DAHA ÖNCE KULLANILMIŞ MI KONTROLÜ
-      email: values.email                          
-    }).then(function (response) {                    
+      email: values.email
+    }).then((response) => {
       if (response.data[0] == undefined) {           // KULLANILMADI İSE YENİ KAYIT EKLE
         axios.post('http://localhost:8000/kayitEkle', {
           name: values.name,
           lastName: values.lastName,
           email: values.email,
           password: values.password
-        }).then(function (response) {
-          alert('Kayıt Başarılı')
-          this.props.navigation.navigate('LoginScreen')
+        }).then((response) => {
+          Alert.alert(
+            //title
+            'Kayıt Başarılı',
+            //body
+            '',
+            [
+              { text: 'OK', onPress: () => this.props.navigation.navigate('Login') },
+            ],
+            { cancelable: false }
+            //clicking out side of alert will not cancel
+          );
         })
-          .catch(function (error) {
+          .catch((error) => {
             console.log(error);
           });
-      }else{
+      } else {
         alert('Bu emaile kayıtlı bir kullanıcı bulunmaktadır.')
       }
     }).catch(function (error) {
@@ -159,9 +168,9 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     marginHorizontal: 5,
   },
-  btn:{
+  btn: {
     marginHorizontal: 5,
-    marginTop:10,
+    marginTop: 10,
   }
 })
 
