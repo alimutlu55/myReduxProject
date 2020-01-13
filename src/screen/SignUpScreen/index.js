@@ -14,11 +14,11 @@ class index extends Component {
   }
 
   _handleSubmit = values => {
-    axios.post('http://localhost:8000/kayitGetir', { // BU EMAİL DAHA ÖNCE KULLANILMIŞ MI KONTROLÜ
+    axios.post('http://myreduxproject.herokuapp.com/kayitGetir', { // BU EMAİL DAHA ÖNCE KULLANILMIŞ MI KONTROLÜ
       email: values.email
     }).then((response) => {
       if (response.data[0] == undefined) {           // KULLANILMADI İSE YENİ KAYIT EKLE
-        axios.post('http://localhost:8000/kayitEkle', {
+        axios.post('http://myreduxproject.herokuapp.com/kayitEkle', {
           name: values.name,
           lastName: values.lastName,
           email: values.email,
