@@ -7,6 +7,7 @@ import * as Yup from 'yup'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { saveUser } from '../../actions'
+import { fetchUser } from '../../actions'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class index extends Component {
@@ -33,6 +34,8 @@ class index extends Component {
   };
 
   _handleSubmit = values => {
+    this.props.dispatch(fetchUser(values))
+    //console.log(this.props.AUTH_SUCCESS)
     axios.post('http://myreduxproject.herokuapp.com/kayitGetir', { // BU EMAİL DAHA ÖNCE KULLANILMIŞ MI KONTROLÜ
       email: values.email
     }).then((response) => {
@@ -40,7 +43,6 @@ class index extends Component {
         alert('Bu emaile kayıtlı bir kullanıcı bulunmamaktadır.')
       } else {
         if (values.password == response.data[0].password) {
-          console.log(response.data[0])
           this._saveUser(response.data[0])
           this._changeScreen('HOMESCREEN')
         } else {
@@ -71,7 +73,7 @@ class index extends Component {
             Yup.object().shape({
               email: Yup
                 .string()
-                .email('*Invalid format')          
+                .email('*Invalid format')
                 .required('*Please enter your email'),
               password: Yup
                 .string()
@@ -128,8 +130,13 @@ class index extends Component {
     )
   }
 }
+function mapStateToProps(state) {
+  return {
+    AUTH_SUCCESS: state.token
+  }
+}
 
-export default connect()(index)
+export default connect(mapStateToProps)(index)
 
 const styles = StyleSheet.create({
   container: {

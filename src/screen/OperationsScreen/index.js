@@ -22,7 +22,7 @@ class index extends Component {
     }
 
     withDraw = (amount) => {
-        if (this.props.totalMoney >= amount) {
+        if (this.props.totalMoneyTL >= amount) {
             this.props.dispatch(withdrawMoney(amount))
             this.setState({ amount: 0 })
         } else {
@@ -69,7 +69,7 @@ class index extends Component {
 
 function mapStateToProps(state) {
     return {
-        totalMoney: state.totalMoney,
+        totalMoneyTL: state.totalMoneyTL,
     }
 }
 

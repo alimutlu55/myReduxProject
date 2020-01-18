@@ -20,14 +20,11 @@ class index extends Component {
             .get('https://www.doviz.gen.tr/doviz_json.asp')
             .then(exchangeRate => exchangeRate.data)
             .then(exchangeRate => {
-                console.log(exchangeRate)
                 this.props.dispatch(fetchExchangeRate(exchangeRate))
             })
     }
 
     render() {
-        console.log('Propslar');
-        console.log(this);
         const { user } = this.props;
         return (
             <View style={{ flex: 1, width: width, height: height, alignItems: 'center' }}>

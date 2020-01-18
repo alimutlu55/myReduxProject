@@ -1,4 +1,13 @@
-import { INVESTMENT, WITHDRAW, SHOW_ACTIVITIES, SAVE_USER, EXCHANGE_RATE } from './actionTypes'
+import {
+    INVESTMENT,
+    WITHDRAW,
+    SHOW_ACTIVITIES,
+    SAVE_USER,
+    EXCHANGE_RATE,
+    AUTH_REQUEST,
+    AUTH_SUCCESS,
+    AUTH_FAILURE
+} from './actionTypes'
 let value;
 
 export const investMoney = (amount) => ({
@@ -15,9 +24,13 @@ export const withdrawMoney = (amount) => ({
     amount,
     activityInfo: {
         id: value++,
-        type: "PARA_ÇEKME",         
+        type: "PARA_ÇEKME",
         amount
     }
+})
+export const fetchUser = (user) => ({
+    type: AUTH_REQUEST,
+    user
 })
 export const viewActivity = () => ({
     type: SHOW_ACTIVITIES,

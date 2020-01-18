@@ -3,3 +3,6 @@ export const WITHDRAW = 'WITHDRAW'
 export const SHOW_ACTIVITIES = 'SHOW_ACTIVITIES'
 export const SAVE_USER = 'SAVE_USER'
 export const EXCHANGE_RATE = 'EXCHANGE_RATE'
+export const AUTH_REQUEST = 'AUTH_REQUEST'
+export const AUTH_SUCCESS = 'AUTH_SUCCESS'
+export const AUTH_FAILURE = 'AUTH_FAILURE';

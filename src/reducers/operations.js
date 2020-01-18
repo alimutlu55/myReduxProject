@@ -4,14 +4,16 @@ let initialState = {
     totalMoneyTL: 0,
     activities: [],
     user: {
-        name:'',
-        lastName:'',
+        name: '',
+        lastName: '',
         email: '',
     },
     exchangeRate: {
         dolar: 0,
         euro: 0
-    }
+    },
+    token: false,
+    error: ''
 }
 
 const operations = (state = initialState, action) => {
@@ -36,9 +38,14 @@ const operations = (state = initialState, action) => {
             return { ...state, user }
         case 'EXCHANGE_RATE':
             return { ...state, exchangeRate }
+        case 'AUTH_REQUEST':
+            return { ...state, action }
+        case 'AUTH_SUCCESS':
+            return { ...state, token: action.payload }
+        case 'AUTH_FAILURE':
+            return { ...state, error: action.error }
+        default: return state
     }
-
-    return state
 }
 
 
