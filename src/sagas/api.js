@@ -1,26 +1,27 @@
 const url = 'http://myreduxproject.herokuapp.com/kayitGetir'
-import axios from 'axios'
+import { INVALID_PASSWORD } from '../actions/actionTypes'
+
 
 function* _getUserInformation(action) {
-    
-
     console.log("Apiye geldi" + JSON.stringify(action.user.email))
-    axios.post('http://myreduxproject.herokuapp.com/kayitGetir', { // BU EMAİL DAHA ÖNCE KULLANILMIŞ MI KONTROLÜ
-        email: action.user.email
-    }).then((response) => {
-        if (response.data[0] == undefined) {
-            alert('Bu emaile kayıtlı bir kullanıcı bulunmamaktadır.')
+    const response = yield fetch(url,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: action.user.email,
+            })
+        })
+    let data = yield response.json();
+    if (response.status === 200) {
+        if (data[0].password == action.user.password) {
+            return yield (data[0])
         } else {
-            if (action.user.password == response.data[0].password) {
-                console.log(response.status)
-                return (response.status === 200)
-            } else {
-                alert('Yanlş şifre.Tekrar deneyiniz.')
-            }
+            return false
         }
-    }).catch((error) => {
-        alert(error);
-    });
+    }
 }
 
 export { _getUserInformation }

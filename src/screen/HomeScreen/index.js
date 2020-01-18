@@ -15,6 +15,8 @@ class index extends Component {
             userLastName: ''
         };
     }
+
+    
     render() {
         const totalMoneyUSD = (this.props.totalMoneyTL / this.props.exchangeRate.dolar).toFixed(2);
         return (
@@ -68,7 +70,7 @@ function mapStateToProps(state) {
         totalMoney: state.totalMoney,
         totalMoneyTL: state.totalMoneyTL,
         exchangeRate: state.exchangeRate,
-        user: state.user
+        user: state.user,
     }
 }
 

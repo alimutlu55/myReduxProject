@@ -4,9 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Header, Button, Body, Title } from 'native-base';
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import axios from 'axios'
 import { connect } from 'react-redux'
-import { saveUser } from '../../actions'
 import { fetchUser } from '../../actions'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -25,40 +23,18 @@ class index extends Component {
     }
   }
 
-  _storeData = async (key, value) => {
-    try {
-      await AsyncStorage.setItem(key, value);
-    } catch (error) {
-      // Error saving data
-    }
-  };
-
   _handleSubmit = values => {
     this.props.dispatch(fetchUser(values))
-    //console.log(this.props.AUTH_SUCCESS)
-    axios.post('http://myreduxproject.herokuapp.com/kayitGetir', { // BU EMAİL DAHA ÖNCE KULLANILMIŞ MI KONTROLÜ
-      email: values.email
-    }).then((response) => {
-      if (response.data[0] == undefined) {
-        alert('Bu emaile kayıtlı bir kullanıcı bulunmamaktadır.')
-      } else {
-        if (values.password == response.data[0].password) {
-          this._saveUser(response.data[0])
-          this._changeScreen('HOMESCREEN')
-        } else {
-          alert('Yanlş şifre.Tekrar deneyiniz.')
-        }
-      }
-    }).catch((error) => {
-      alert(error);
-    });
-  }
-
-  _saveUser = user => {
-    this.props.dispatch(saveUser(user))
   }
 
   render() {
+    if (this.props.INVALID_PASSWORD) {
+      alert('Yanlş şifre.Tekrar deneyiniz.')
+    }
+    if (this.props.AUTH_SUCCESS) {
+      this._changeScreen('HOMESCREEN')
+    }
+
     return (
       <View style={styles.container}>
         <Header>
@@ -132,7 +108,8 @@ class index extends Component {
 }
 function mapStateToProps(state) {
   return {
-    AUTH_SUCCESS: state.token
+    AUTH_SUCCESS: state.token,
+    INVALID_PASSWORD: state.invalid
   }
 }
 

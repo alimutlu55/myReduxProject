@@ -13,7 +13,8 @@ let initialState = {
         euro: 0
     },
     token: false,
-    error: ''
+    error: '',
+    invalid: false
 }
 
 const operations = (state = initialState, action) => {
@@ -35,7 +36,7 @@ const operations = (state = initialState, action) => {
         case 'SHOW_ACTIVITIES':
             return { activities }
         case 'SAVE_USER':
-            return { ...state, user }
+            return { ...state, user: action.payload }
         case 'EXCHANGE_RATE':
             return { ...state, exchangeRate }
         case 'AUTH_REQUEST':
@@ -44,6 +45,8 @@ const operations = (state = initialState, action) => {
             return { ...state, token: action.payload }
         case 'AUTH_FAILURE':
             return { ...state, error: action.error }
+        case 'INVALID_PASSWORD':
+            return { ...state, invalid: action.payload }
         default: return state
     }
 }
