@@ -1,10 +1,10 @@
-const url = 'http://myreduxproject.herokuapp.com/kayitGetir'
+const urlKayirGetir = 'http://myreduxproject.herokuapp.com/kayitGetir'
+const urlDövizGetir = 'https://www.doviz.gen.tr/doviz_json.asp'
 import { INVALID_PASSWORD } from '../actions/actionTypes'
 
 
 function* _getUserInformation(action) {
-    console.log("Apiye geldi" + JSON.stringify(action.user.email))
-    const response = yield fetch(url,
+    const response = yield fetch(urlKayirGetir,
         {
             method: 'POST',
             headers: {
@@ -24,4 +24,21 @@ function* _getUserInformation(action) {
     }
 }
 
-export { _getUserInformation }
+function* _getExchangeRates() {
+    const response = yield fetch(urlDövizGetir, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    let data = yield response.json();
+    console.log(data.dolar)
+    if (response.status === 200) {
+        return yield (data)
+    } else {
+        return (false)
+    }
+}
+
+
+export { _getUserInformation, _getExchangeRates }

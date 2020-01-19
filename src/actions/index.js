@@ -3,10 +3,8 @@ import {
     WITHDRAW,
     SHOW_ACTIVITIES,
     SAVE_USER,
-    EXCHANGE_RATE,
-    AUTH_REQUEST,
-    AUTH_SUCCESS,
-    AUTH_FAILURE
+    EXCHANGE_RATE_REQUEST,
+    AUTH_REQUEST
 } from './actionTypes'
 let value;
 
@@ -39,7 +37,6 @@ export const saveUser = (user) => ({
     type: SAVE_USER,
     user
 })
-export const fetchExchangeRate = (exchangeRate) => ({
-    type: EXCHANGE_RATE,
-    exchangeRate
+export const fetchExchangeRate = () => ({
+    type: EXCHANGE_RATE_REQUEST,
 })

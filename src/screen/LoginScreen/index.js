@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput } from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage';
 import { Header, Button, Body, Title } from 'native-base';
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { connect } from 'react-redux'
 import { fetchUser } from '../../actions'
+import { fetchExchangeRate } from '../../actions'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class index extends Component {
@@ -25,6 +25,7 @@ class index extends Component {
 
   _handleSubmit = values => {
     this.props.dispatch(fetchUser(values))
+    this.props.dispatch(fetchExchangeRate())
   }
 
   render() {

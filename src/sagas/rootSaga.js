@@ -1,16 +1,17 @@
 import { delay } from 'redux-saga'
-import { all,fork } from 'redux-saga/effects'
+import { all, fork } from 'redux-saga/effects'
 
 
 import { watchInvestment, watchWithdraw } from './operationSagas'
-import { watchGetUserInformation } from './serviceSagas'
+import { watchGetUserInformation, watchGetExchangeRate } from './serviceSagas'
 
 export default function* rootSaga() {
-    yield all ([
+    yield all([
         fork(watchInvestment),
         fork(watchWithdraw),
-        fork(watchGetUserInformation)
+        fork(watchGetUserInformation),
+        fork(watchGetExchangeRate)
     ])
 
-    
+
 }

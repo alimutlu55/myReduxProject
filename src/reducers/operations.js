@@ -1,5 +1,3 @@
-const totalMoney = 0;
-
 let initialState = {
     totalMoneyTL: 0,
     activities: [],
@@ -18,7 +16,7 @@ let initialState = {
 }
 
 const operations = (state = initialState, action) => {
-    const { activityInfo, amount, user, exchangeRate } = action;
+    const { activityInfo, amount } = action;
 
     switch (action.type) {
         case 'INVESTMENT':
@@ -37,8 +35,10 @@ const operations = (state = initialState, action) => {
             return { activities }
         case 'SAVE_USER':
             return { ...state, user: action.payload }
-        case 'EXCHANGE_RATE':
-            return { ...state, exchangeRate }
+        case 'EXCHANGE_RATE_SUCCESS':
+            return { ...state, exchangeRate: action.payload }
+        case 'EXCHANGE_RATE_REQUEST':
+            return { ...state, action }
         case 'AUTH_REQUEST':
             return { ...state, action }
         case 'AUTH_SUCCESS':
